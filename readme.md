@@ -14,6 +14,8 @@ So have a constraint that a team_id can only have 25 player_id where registered 
 
 Fantasty premier league started in 2002 so i have that much data for any currently active players.
 
+datasources - sofascore, footballref, transfermrkt
+
 Tables in my DB:
 
 ## Players
@@ -38,7 +40,7 @@ position_id position_abbr position_name
 
 ---
 
-player_id match_id goals_scored assists passes_completed passes_attempted tackles_won tackles_attempted interceptions fouled_against fouls_committed yellow_cards red_cards handeballs penalty_conceded penalty_won turnover progressive_carry dribbles_completed dribbles_attempted minutes_played tackles aerial_rate penalties_scored
+player_id match_id goals_scored assists passes_completed passes_attempted tackles_won tackles_attempted interceptions fouled_against fouls_committed yellow_cards red_cards handeballs penalty_conceded penalty_won turnover progressive_carry dribbles_completed dribbles_attempted minutes_played aerial_rate penalties_scored
 
 shots shots_on_target shots_off_target shots_blocked key_passes shot_creating_actions touches_in_opposition_box offsides touches_final_third
 

@@ -7,27 +7,143 @@ create table core.players (
 create table core.teams (
     team_id     uuid    primary key default uuidv7(),
     team_name   text    not null,
-    league_id   uuid    not null
+    league_id   uuid    not null,
+    season_id   uuid    not null
 );
 
-create table core.teams (
+create table core.fpl_positions (
+    fpl_position_id     uuid        primary key default uuidv7(),
+    fpl_position_name   text        not null unique,
+    fpl_position_abbr   char(3)     not null unique
+);
+
+create table core.positions (
     position_id     uuid    primary key default uuidv7(),
     position_name   text    not null unique,
     position_abbr   text    not null unique
 );
 
-create table core.nationality (
+create table core.nationalities (
     nationality_id      uuid    primary key default uuidv7(),
     nationality_name    text    not null unique,
-    nationality_code    char(2) not null unique,
+    nationality_code    char(2) not null unique
 );
 
-create table core.league (
+create table core.leagues (
     league_id   uuid    primary key default uuidv7(),
     league_name text    not null unique
 );
 
-create table core.season (
+create table core.seasons (
     season_id   uuid    primary key default uuidv7(),
     season_name text    not null unique
+);
+
+create table core.referees (
+    referee_id      uuid    primary key default uuidv7(),
+    referee_name    text    not null
+);
+
+create table core.matches (
+    match_id            uuid        primary key default uuidv7(),
+    home_team_id        uuid        not null,
+    away_team_id        uuid        not null,
+    home_team_score     smallint    not null,
+    away_team_score     smallint    not null,
+    referee_id          uuid        not null,
+    league_id           uuid        not null,
+    season_id           uuid        not null
+);
+
+create table core.rosters (
+    roster_id               uuid    primary key default uuidv7(),
+    player_id               uuid    not null,
+    team_id                 uuid    null,
+    position_id             uuid    not null,
+    fpl_position_id         uuid    not null,
+    secondary_position_id   uuid    null,
+    season_initial_price    numeric not null,
+    season_id               uuid    not null
+);
+
+create table core.statistics (
+
+    -- General Stats for all players
+
+    player_id               uuid        not null,
+    match_id                uuid        not null,
+    goals                   smallint    not null default 0,
+    assists                 smallint    not null default 0,
+    own_goals               smallint    not null default 0,
+    passes_completed        smallint    not null default 0,
+    passes_attempted        smallint    not null default 0,
+    tackles_won             smallint    not null default 0,
+    tackles_attempted       smallint    not null default 0,
+    interceptions           smallint    not null default 0,
+    fouled_against          smallint    not null default 0,
+    fouls_committed         smallint    not null default 0,
+    yellow_cards            smallint    not null default 0,
+    red_cards               smallint    not null default 0,
+    handballs               smallint    not null default 0,
+    penalty_conceded        smallint    not null default 0,
+    penalty_won             smallint    not null default 0,
+    penalty_scored          smallint    not null default 0,
+    turnover                smallint    not null default 0,
+    progressive_carry       smallint    not null default 0,
+    dribbles_completed      smallint    not null default 0,
+    dribbles_attempted      smallint    not null default 0,
+    minutes_played          smallint    not null default 0,
+    aerial_rate             decimal     not null default 0.00,
+
+    -- Forward Stats
+
+    shots_on_target         smallint    not null default 0,
+    shots_off_target        smallint    not null default 0,
+    atk_shots_blocked       smallint    not null default 0,
+    key_passes              smallint    not null default 0,
+    touches_opp_box         smallint    not null default 0,
+    offsides                smallint    not null default 0,
+    touches_final_third     smallint    not null default 0,
+
+    -- Midfield Stats
+
+    progressive_passes      smallint    not null default 0,
+    passes_to_final_third   smallint    not null default 0,
+    cross_completed         smallint    not null default 0,
+    cross_attempted         smallint    not null default 0,
+    through_balls           smallint    not null default 0,
+    touches_midfield        smallint    not null default 0,
+
+    -- Defensive Stats
+
+    clearences              smallint    not null default 0,
+    def_blocked_shots       smallint    not null default 0,
+    blocked_passes          smallint    not null default 0,
+    pressure_success        smallint    not null default 0,
+    pressure_attempt        smallint    not null default 0,
+    ground_duel_won         smallint    not null default 0,
+    ground_duel_total       smallint    not null default 0,
+    aerial_duel_won         smallint    not null default 0,
+    aerial_duel_total       smallint    not null default 0,
+    ball_recovery           smallint    not null default 0,
+    defensive_action        smallint    not null default 0,
+    touches_defensive       smallint    not null default 0,
+
+    -- Goalkeeper Stats
+
+    saves_in_box            smallint    not null default 0,
+    saves_outside_box       smallint    not null default 0,
+    save_percentage         decimal     not null default 0.00,
+    clean_sheet             smallint    not null default 0,
+    goals_conceded          smallint    not null default 0,
+    post_shot_xg_faced      decimal     not null default 0,
+    crosses_blocked_saved   smallint    not null default 0,
+    sweeper_actions         smallint    not null default 0,
+
+    -- Fantasy Stats
+
+    fpl_base_points         smallint    not null default 0,
+    fpl_bonus_points        smallint    not null default 0,
+    fpl_current_price       numeric     not null default 00.0
+
 );
