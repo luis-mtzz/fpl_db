@@ -1,0 +1,36 @@
+create or replace function uuidv7()
+returns uuid
+language plpgsql
+as $$
+declare
+    unix_ts_ms      bigint;
+    uuid_bytes      bytea;
+    random_bytes    bytea;
+begin
+    -- Get current time in ms
+    unix_ts_ms := (extract(epoch from clock_timestamp()) * 1000)::bigint;
+
+    -- Generate 10 random bytes
+    random_bytes := gen_random_bytes(10);
+
+    -- initiate 16 byte uuid
+    uuid_bytes := B'';
+
+    -- 48-bit timestamp (0 - 5)
+    uuid_bytes := uuid_bytes || substring(int8send(unix_ts_ms) from 3 for 6);
+
+    -- Version 7 (6)
+    uuid_bytes := uuid_bytes || (B'0111' || get_byte(random_bytes, 0)::bit(4))::bit(8)bytea;
+
+    -- 4 random bits (7)
+    uuid_bytes := uuid_bytes || substring(get_byte(random_bytes, 0)::bit(8)::bytea from 2 for 1);
+
+    -- 6 random bits (8)
+    uuid_bytes := uuid_bytes || (B'10' || substring(get_byte(random_bytes, 1)::bit(8)::bytea from 3 for 1))::bit(8)::bytea;
+
+    -- 7 random bytes (9 - 15)
+    uuid_bytes := uuid_bytes || substring(random_bytes from 3 for 7);
+
+    return encode(uuid_bytes, 'hex')::uuid;
+end;
+$$
