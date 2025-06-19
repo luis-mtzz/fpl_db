@@ -1,0 +1,104 @@
+alter table core.statistics
+    add primary key (player_id, match_id);
+
+alter table core.players
+    add constraint fk_players_nationality
+    foreign key (nationality_id) references core.nationalities(nationality_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.teams
+    add constraint fk_teams_league
+    foreign key (league_id) references core.leagues(league_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.teams
+    add constraint fk_teams_season
+    foreign key (season_id) references core.seasons(season_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.leagues
+    add constraint fk_leagues_nationality
+    foreign key (nationality_id) references core.nationalities(nationality_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.matches
+    add constraint fk_matches_home_team
+    foreign key (home_team_id) references core.teams(team_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.matches
+    add constraint fk_matches_away_team
+    foreign key (away_team_id) references core.teams(team_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.matches
+    add constraint fk_matches_referee
+    foreign key (referee_id) references core.referees(referee_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.matches
+    add constraint fk_matches_league
+    foreign key (league_id) references core.leagues(league_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.matches
+    add constraint fk_matches_season
+    foreign key (season_id) references core.seasons(season_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.rosters
+    add constraint fk_rosters_player
+    foreign key (player_id) references core.players(player_id)
+    on delete cascade
+    on update cascade;
+
+alter table core.rosters
+    add constraint fk_rosters_team
+    foreign key (team_id) references core.teams(team_id)
+    on delete set null
+    on update cascade;
+
+alter table core.rosters
+    add constraint fk_rosters_position
+    foreign key (position_id) references core.positions(position_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.rosters
+    add constraint fk_rosters_fpl_position
+    foreign key (fpl_position_id) references core.fpl_positions(fpl_position_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.rosters
+    add constraint fk_rosters_secondary_position
+    foreign key (secondary_position_id) references core.positions(position_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.rosters
+    add constraint fk_rosters_season
+    foreign key (season_id) references core.seasons(season_id)
+    on delete restrict
+    on update cascade;
+
+alter table core.statistics
+    add constraint fk_statistics_player
+    foreign key (player_id) references core.players(player_id)
+    on delete cascade
+    on update cascade;
+
+alter table core.statistics
+    add constraint fk_statistics_match
+    foreign key (match_id) references core.matches(match_id)
+    on delete cascade
+    on update cascade;

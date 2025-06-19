@@ -30,8 +30,9 @@ create table core.nationalities (
 );
 
 create table core.leagues (
-    league_id   uuid    primary key default uuidv7(),
-    league_name text    not null unique
+    league_id           uuid    primary key default uuidv7(),
+    league_name         text    not null unique,
+    nationality_id      uuid    not null
 );
 
 create table core.seasons (
