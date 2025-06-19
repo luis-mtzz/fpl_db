@@ -1,0 +1,13 @@
+select
+    player_name,
+    team_name,
+    position_name,
+    fpl_position_name,
+    season_initial_price,
+    season_name
+from core.rosters
+join core.players p on rosters.player_id = p.player_id
+join core.teams t on rosters.team_id = t.team_id
+join core.positions ps on rosters.position_id = ps.position_id
+join core.fpl_positions fp on rosters.fpl_position_id = fp.fpl_position_id
+join core.seasons s on rosters.season_id = s.season_id

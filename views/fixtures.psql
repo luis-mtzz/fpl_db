@@ -1,0 +1,17 @@
+SELECT
+    home_t.team_name AS home_team,
+    away_t.team_name AS away_team,
+    m.home_team_score,
+    m.away_team_score,
+    l.league_name,
+    s.season_name
+FROM 
+    core.matches AS m
+JOIN 
+    core.teams AS home_t ON m.home_team_id = home_t.team_id
+JOIN 
+    core.teams AS away_t ON m.away_team_id = away_t.team_id
+JOIN 
+    core.leagues AS l ON m.league_id = l.league_id
+JOIN 
+    core.seasons AS s ON m.season_id = s.season_id;

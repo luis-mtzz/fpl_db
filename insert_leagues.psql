@@ -1,0 +1,14 @@
+insert into core.leagues (league_name, nationality_id) values
+    ('English Premier League', '01978941-1a49-7886-994c-cceca128da18'),
+    ('La Liga', '01978941-1a4a-7600-abde-c85d45cd4c9e'),
+    ('Serie A', '01978941-1a49-7190-8fdc-3254a7b0d16d'),
+    ('Bundesliga', '01978941-1a49-7e79-8e21-0fa4a34f5cef'),
+    ('Ligue 1', '01978941-1a49-79f6-8006-1d1fdd407f8c'),
+    ('Portuguese Primeria Liga', '01978941-1a4a-7059-b0d7-0f9e160a71a7'),
+    ('Dutch Eredivisie', '01978941-1a4a-7a46-9b27-fdcae21e75cb'),
+    ('Belgian Pro League', '01978941-1a49-7756-aec9-a0b8d87ca077'),
+    ('Brazilian Serie A', '01978941-1a49-70b5-aad6-83affc83254b'),
+    ('Major League Soccer', '01978941-1a4a-77f9-9b9a-b74e91c4d6bf'),
+    ('English Championship', '01978941-1a49-7886-994c-cceca128da18'),
+    ('Primera Division', '01978941-1a48-71a4-aae1-789ade2c09a6'),
+    ('Liga BBVA MX', '01978941-1a49-7514-8c7a-f792816b785f');
