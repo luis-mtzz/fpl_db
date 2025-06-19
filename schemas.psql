@@ -1,0 +1,3 @@
+create schema core;
+create schema staging;
+create schema analysis;

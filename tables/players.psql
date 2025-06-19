@@ -1,0 +1,5 @@
+create table core.players (
+    player_id       uuid    primary key default uuidv7(),
+    player_name     text    not null,
+    nationality_id  uuid    not null
+)

@@ -1,0 +1,33 @@
+create table core.players (
+    player_id       uuid    primary key default uuidv7(),
+    player_name     text    not null,
+    nationality_id  uuid    not null
+);
+
+create table core.teams (
+    team_id     uuid    primary key default uuidv7(),
+    team_name   text    not null,
+    league_id   uuid    not null
+);
+
+create table core.teams (
+    position_id     uuid    primary key default uuidv7(),
+    position_name   text    not null unique,
+    position_abbr   text    not null unique
+);
+
+create table core.nationality (
+    nationality_id      uuid    primary key default uuidv7(),
+    nationality_name    text    not null unique,
+    nationality_code    char(2) not null unique,
+);
+
+create table core.league (
+    league_id   uuid    primary key default uuidv7(),
+    league_name text    not null unique
+);
+
+create table core.season (
+    season_id   uuid    primary key default uuidv7(),
+    season_name text    not null unique
+);
